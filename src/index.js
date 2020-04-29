@@ -1,6 +1,12 @@
 const dogURL = 'http://localhost:3000/dogs'
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   getDogs()
+  setUpSubmit()
 
 })
 
@@ -46,7 +52,19 @@ function renderDog (dog) {
 
 function setUpSubmit () {
   const submitBtn = document.querySelector('input[type=submit]')
-  
+  submitBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    updateDogTable()
+
+    console.log("submit clicked")
+  })
 }
 
-
+function updateDogTable (dogObj, dogId) {
+  console.log("am i a dog id?", dogId)
+  fetch(`` , {
+    method: 'PATCH',
+    headers,
+    body: JSON.stringify(dogObj)
+  })
+}
