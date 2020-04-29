@@ -3,12 +3,17 @@ headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
+let dogId  // how to make this global?
+
 
 document.addEventListener('DOMContentLoaded', () => {
+
   getDogs()
   setUpSubmit()
-
+  
 })
+
+// abstraction
 
 function getDogs () {
   fetch(dogURL)
@@ -83,9 +88,11 @@ function setUpSubmit () {
       sex: sexInput
     }
     updateDogTable(newDog, dogId) // cannot access dog !!! HOW THE FUCK DO I ACCESS DOG
+    
 
     console.log("submit clicked")
   })
+  
 }
 
 function updateDogTable (dogObj, dogId) {
@@ -96,7 +103,5 @@ function updateDogTable (dogObj, dogId) {
     body: JSON.stringify(dogObj)
   })
   .then(r => r.json())
-  .then(dog => {
-    console.log(dog)
-  })
+  .then(render(dogObj))
 }
