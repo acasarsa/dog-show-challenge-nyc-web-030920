@@ -16,6 +16,7 @@ function getDogs () {
   .then(dogs => {
     dogs.forEach(dog => {
       renderDog(dog)
+      
     });
   })
 }
@@ -54,7 +55,28 @@ function setUpSubmit () {
   const submitBtn = document.querySelector('input[type=submit]')
   submitBtn.addEventListener('click', (e) => {
     e.preventDefault()
-    updateDogTable()
+    console.log(e.target.parentNode)
+    const dogNameInput = document.querySelector('[name="name"]')
+    let nameInput = dogNameInput.value
+
+    const dogBreedInput = document.querySelector('[name="breed"]')
+    let breedInput = dogBreedInput.value
+
+    const dogSexInput = document.querySelector('[name="sex"]')
+    let sexInput = dogSexInput.value
+
+    // how to access dataset.id from somewhere else??? this is a huge issue i need to understand. 
+
+
+    // let formData = new FormData()
+    // formData.append('name', )
+
+    const newDog = {
+      name: nameInput,
+      breed: breedInput,
+      sex: sexInput
+    }
+    updateDogTable(newDog, dogId) // cannot access dog !!! HOW THE FUCK DO I ACCESS DOG
 
     console.log("submit clicked")
   })
@@ -62,9 +84,13 @@ function setUpSubmit () {
 
 function updateDogTable (dogObj, dogId) {
   console.log("am i a dog id?", dogId)
-  fetch(`` , {
+  fetch(`${dogURL}/${dogId}`, {
     method: 'PATCH',
     headers,
     body: JSON.stringify(dogObj)
+  })
+  .then(r => r.json())
+  .then(dog => {
+    console.log(dog)
   })
 }
