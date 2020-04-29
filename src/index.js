@@ -3,7 +3,7 @@ headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 }
-let dogId  // how to make this global?
+// let dogId  // how to make this global?
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
   
   setUpSubmit()
 
-  let dogId = dog.id // dog is not defined... 
-  console.log(dogId)
+  // let dogId = dog.id // dog is not defined... 
+  // console.log(dogId)
 })
 
 // abstraction
@@ -112,7 +112,7 @@ function updateDogTable (dogObj, dogId) {
   })
   // await getDogs()
   .then(r => r.json())
-  .then(render(dogObj))
+  .then(renderDog(dogObj))
 }
 
 // can also run getDogs() instead of the .then's
