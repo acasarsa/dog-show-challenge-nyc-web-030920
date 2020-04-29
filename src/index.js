@@ -7,10 +7,14 @@ let dogId  // how to make this global?
 
 
 document.addEventListener('DOMContentLoaded', () => {
-
-  getDogs()
-  setUpSubmit()
   
+  getDogs()
+  
+  
+  setUpSubmit()
+
+  let dogId = dog.id // dog is not defined... 
+  console.log(dogId)
 })
 
 // abstraction
@@ -39,6 +43,10 @@ function renderDog (dog) {
   dogTableBody.append(tr)
   // how do i abstract this and make sure it is added to the right tr ?? 
   // how to dynamically use the dataset.id i put in... but don't know
+
+  ///////
+  // if i had dog object global i could abstract this /// 
+  //////
   tr.addEventListener('click', (e) => {
 
     if (e.target.className === 'edit-dog') {
@@ -87,7 +95,7 @@ function setUpSubmit () {
       breed: breedInput,
       sex: sexInput
     }
-    updateDogTable(newDog, dogId) // cannot access dog !!! HOW THE FUCK DO I ACCESS DOG
+    updateDogTable(newDog, dogId) 
     
 
     console.log("submit clicked")
@@ -102,6 +110,11 @@ function updateDogTable (dogObj, dogId) {
     headers,
     body: JSON.stringify(dogObj)
   })
+  // await getDogs()
   .then(r => r.json())
   .then(render(dogObj))
 }
+
+// can also run getDogs() instead of the .then's
+// with this way it will at least update the values when u click edit after submit.... not that helpful though. 
+// but does let you know on front end that it was updated
