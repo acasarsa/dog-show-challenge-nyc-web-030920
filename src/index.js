@@ -47,6 +47,9 @@ function renderDog (dog) {
 
       const dogSexInput = document.querySelector('[name="sex"]')
       dogSexInput.value = dog.sex
+
+      const dogForm = document.getElementById('dog-form')
+      dogForm.dataset.id = dog.id
     }
   })
 }
@@ -55,7 +58,7 @@ function setUpSubmit () {
   const submitBtn = document.querySelector('input[type=submit]')
   submitBtn.addEventListener('click', (e) => {
     e.preventDefault()
-    console.log(e.target.parentNode)
+    // console.log(e.target.parentNode)
     const dogNameInput = document.querySelector('[name="name"]')
     let nameInput = dogNameInput.value
 
@@ -67,6 +70,9 @@ function setUpSubmit () {
 
     // how to access dataset.id from somewhere else??? this is a huge issue i need to understand. 
 
+    const dogFormParent = e.target.parentNode
+    const dogId = dogFormParent.dataset.id
+    console.log(dogId)
 
     // let formData = new FormData()
     // formData.append('name', )
